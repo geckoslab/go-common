@@ -1,0 +1,64 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/debian
+{
+	"name": "Debian",
+	"runArgs": ["--name", "geckoslab-go-common"],
+
+  // Mount the SSH config and SSH keys.
+  "mounts": [
+    "source=${env:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+  ],
+
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/base:trixie",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"installZsh": true,
+			"configureZshAsDefaultShell": true,
+			"installOhMyZsh": true,
+			"installOhMyZshConfig": true,
+			"upgradePackages": true,
+			"installSsl": true,
+			"username": "automatic",
+			"userUid": "automatic",
+			"userGid": "automatic"
+		},
+		"ghcr.io/devcontainers/features/go:1": {
+			"version": "1.25"
+		},
+
+    // Add Java & Node.js for SonarQube analysis.
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "18"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    }
+	},
+
+	// Customize the VS Code experience in the container.
+	"customizations": {
+    "vscode": {
+      "extensions": [
+        "eamodio.gitlens",
+        "EditorConfig.EditorConfig",
+        "SonarSource.sonarlint-vscode",
+        "ms-vscode.makefile-tools",
+        "tamasfe.even-better-toml",
+        "shd101wyy.markdown-preview-enhanced",
+        "GitHub.vscode-github-actions"
+	    ]
+    }
+  }
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
